@@ -7,11 +7,11 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/auto-all-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/auto-all-{{ version }}.tar.gz
   sha256: 495ad1fe74972207837f7ae40ef8ee581da92e63c57f6cc496b2869c05aa9b12
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
 
@@ -20,11 +20,11 @@ requirements:
     - m2r
     - pip
     - pygments
-    - python >=3.6
+    - python {{ python_min }}
     - restructuredtext_lint
     - setuptools
   run:
-    - python >=3.6
+    - python >={{ python_min }}
 
 test:
   imports:
@@ -33,6 +33,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/jongracecox/auto-all
